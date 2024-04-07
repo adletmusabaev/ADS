@@ -1,0 +1,176 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Task1();
+    }
+
+    private static void Task1() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        int[] array = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        int min = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+        System.out.println("The minimum is "+ min);
+    }
+
+    private static void Task2() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] numbers = new int[n];
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+        double average = (double) sum / numbers.length;
+        System.out.println("The average is " + average);
+    }
+
+    private static void Task3() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        if (n <= 1) {
+            System.out.println("Composite");
+            return;
+        }
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
+                System.out.println("Composite");
+                return;
+            }
+        }
+        System.out.println("Prime");
+    }
+    private static void Task4() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        long result = calculateFactorial(n);
+        System.out.println("The factorial is " + result);
+    }
+
+    public static long calculateFactorial(int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            return n * calculateFactorial(n - 1);
+        }
+    }
+    private static void Task5() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        int[] fib = new int[n+1];
+        fib[0] = 0;
+        fib[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+
+        System.out.println("The fibonacci is " + fib[n]);
+    }
+    private static void Task6() {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int n = scanner.nextInt();
+
+        int result = calculatePower(a, n);
+        System.out.println("The Power of a and n " + result);
+    }
+    public static int calculatePower(int a, int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            return a * calculatePower(a, n - 1);
+        }
+    }
+    private static void Task7() {
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        int n = str.length();
+
+        permute(str, 0, n-1);
+    }
+    private static void permute(String str, int l, int r) {
+        if (l == r) {
+            System.out.println(str);
+        } else {
+            for (int i = l; i <= r; i++) {
+                str = swap(str, l, i);
+                permute(str, l + 1, r);
+                str = swap(str, l, i);
+            }
+        }
+    }
+        public static String swap (String a,int i, int j) {
+            char temp;
+            char[] charArray = a.toCharArray();
+            temp = charArray[i];
+            charArray[i] = charArray[j];
+            charArray[j] = temp;
+            return String.valueOf(charArray);
+        }
+        private static void Task8() {
+            Scanner scanner = new Scanner(System.in);
+            String s = scanner.nextLine();
+
+            boolean allDigits = true;
+            for (int i = 0; i < s.length(); i++) {
+                if (!Character.isDigit(s.charAt(i))) {
+                    allDigits = false;
+                    break;
+                }
+            }
+
+            if (allDigits) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+        private static void Task9() {
+            Scanner scanner = new Scanner(System.in);
+            int n = scanner.nextInt();
+            int k = scanner.nextInt();
+
+            int[] C = new int[k + 1];
+            C[0] = 1;
+
+            for (int i = 1; i <= n; i++) {
+                for (int j = Math.min(i, k); j > 0; j--)
+                    C[j] = C[j] + C[j - 1];
+            }
+            System.out.println("The binomial coefficient is " + C[k]);
+        }
+        private static void Task10() {
+            Scanner scanner = new Scanner(System.in);
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+
+            int result = calculateGCD(a, b);
+            System.out.println("The GCD is " + result);
+        }
+        public static int calculateGCD(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return calculateGCD(b, a % b);
+        }
+    }
+}
